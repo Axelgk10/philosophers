@@ -39,10 +39,14 @@ int			parse_args(int argc, char **argv, t_data *data);
 int			init_data(t_data *data);
 long long	get_time(void);
 void		smart_sleep(long long time, t_data *data);
+int			is_simulation_ended(t_data *data);
 void		print_status(t_philo *philo, char *str);
+void		take_forks(t_philo *philo);
+void		eat(t_philo *philo);
 void		*philo_routine(void *arg);
 void		*monitor_routine(void *arg);
 int			start_simulation(t_data *data);
 void		cleanup(t_data *data);
+int			ft_atoi(const char *nptr);
 
 #endif
