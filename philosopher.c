@@ -6,6 +6,9 @@ void	take_forks(t_philo *philo)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		print_status(philo, "has taken a fork");
+		while (!is_simulation_ended(philo->data))
+			usleep(100);
+		pthread_mutex_unlock(philo->left_fork);
 		return ;
 	}
 	if (philo->id % 2 == 0)
@@ -27,10 +30,7 @@ void	eat(t_philo *philo)
 {
 	take_forks(philo);
 	if (philo->data->num_philos == 1)
-	{
-		pthread_mutex_unlock(philo->left_fork);
 		return ;
-	}
 	pthread_mutex_lock(&philo->data->meal_check);
 	philo->last_meal_time = get_time();
 	philo->meals_eaten++;
